@@ -1,0 +1,10 @@
+$ ./final_bells 17594 01011011 6        # state at Bell 298,793,327: W = 01011011, m >= 3, n mod 3^9 = 17594
+Bell +1: n=23460 (mod 3 = 0), step 137681102
+Bell +2: n=31283 (mod 3 = 2), step 382470587
+Bell +3: n=41712 (mod 3 = 0), step 817599793
+Bell +4: n=55619 (mod 3 = 2), step 1591204474
+Bell +5: n=74160 (mod 3 = 0), step 2966409246
+Bell +6: n=98883 (mod 3 = 0), step 5411291431
+Bell +7: n=131847 (mod 3 = 0), step 9757759643
+Bell +8: n=175799 (mod 3 = 2), step 17484828899
+TM HALT after 8 further Bells, 31221313681 TM steps, state E reading 1

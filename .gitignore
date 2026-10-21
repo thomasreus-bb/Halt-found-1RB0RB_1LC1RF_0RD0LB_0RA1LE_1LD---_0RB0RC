@@ -1,0 +1,6 @@
+sim/belldc3
+sim/progress3.log
+sim/checkpoints3/*.tmp
+verify/final_bells
+__pycache__/
+*.pkl

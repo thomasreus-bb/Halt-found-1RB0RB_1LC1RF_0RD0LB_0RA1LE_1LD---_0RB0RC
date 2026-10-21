@@ -1,0 +1,8 @@
+# belldc3 checkpoint (1RB0RB_1LC1RF_0RD0LB_0RA1LE_1LD---_0RB0RC)
+bell 1001
+W 
+m 73
+n_bits 420
+n_hex 874f6b5131c086e60301d8ee81d94d860de68cca310ca495dfaf9984568edeaab706533593104b63179bbb3f6d655f3758379531e
+dmin 14 at_bell 38
+checksum 80f18a703bdab10c
