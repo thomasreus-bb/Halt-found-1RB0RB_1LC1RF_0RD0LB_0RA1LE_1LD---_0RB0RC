@@ -13,7 +13,7 @@ At that point the long block of the tape has about 1.24·10⁸ bits as a number,
 This is the first success of the "vampire method" developed for the [vampire family](https://github.com/thomasreus-bb/bb6-vampire-family-1RB0LA_0RC0RB_1LD1LA_1LC1RE_1RF0RD_1LC---): find the Bell structure of a machine, derive a finite table for the Bell map, estimate the halting rate with a Markov model, and if the rate is not too small, simulate the Bell map exactly and fast until the HALT.
 
 <p align="center"><img src="img/spacetime.jpg" alt="space-time diagram" height="500"></p>
-<p align="center"><em>Space-time diagram from the blank tape (time runs downward, tape horizontal). The growing arches are the Bells: in each Bell the head sweeps across the long block, which grows by a factor of about 4/3 from Bell to Bell.</em></p>
+<p align="center"><em>Space-time diagram from the blank tape. Each Bell grows by a factor of about 4/3.</em></p>
 
 ---
 
