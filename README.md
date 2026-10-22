@@ -1,7 +1,7 @@
 # 1RB0RB_1LC1RF_0RD0LB_0RA1LE_1LD---_0RB0RC halts (BB(6) holdout)
 
 Author: Thomas Reus, with the AI model Claude Opus 5.5  
-Status: 21 Oct 2026 (informal result, not a formal proof)
+Status: 22 Oct 2026 (informal result, independently confirmed; not a formal proof)
 
 The BB(6) holdout
 
@@ -91,7 +91,9 @@ On the way, the orbit came within d = 1 of a HALT entry at Bell 154,541,599 with
 4. **The last 8 Bells on the real machine.** The next 8 Bells depend only on n mod 3⁹. At Bell 298,793,327 the state is W = `01011011`, m ≥ 3, n mod 3⁹ = 17,594. A direct simulation of the Turing machine from the tape `0 11 0 1 0 1^17594 01011011 (01011)^6` (`verify/final_bells.c`) **halts after exactly 8 Bells**, in state E reading a 1, as predicted (`verify/final_bells.out`, 3.1·10¹⁰ TM steps).
 5. **Plausibility.** The HALT came at 3·10⁸ Bells, within the range expected from the Markov estimate (6.4·10⁸).
 
-**What is not proven formally:** that the Bell map with this table describes the machine for all n (the table entries were checked for several n and m, and the Bell only reads the lowest base-3 digit, but there is no formal proof), and the correctness of the long computation (GMP, one program). A second, independent implementation of the Bell iteration would be the most valuable additional check.
+6. **Independent confirmation (22 Oct 2026).** Dennis (bbchallenge Discord) re-did the whole computation independently, starting from the TM alone and comparing with the data files only at the end: his own derivation of the Bell table (identical on every shared key), his own divide-and-conquer iteration (Python + gmpy2; agrees with a naive loop up to 10⁶ Bells, two block splits give identical results, all checkpoints and KCHECK lines match), and direct TM runs from reduced configurations for the last Bells. He obtains the same HALT: Bell 298,793,335, W = `00`, n ≡ 2 mod 3, m = 30,617,182, **n with 124,010,443 bits and n mod 2⁶⁴ = 10538133604703710903**; these values also follow from `belldc3`'s checkpoint at Bell 298,793,327 with 8 more Bells of the table.
+
+**What is not proven formally:** that the Bell map with this table describes the machine for all n (the table entries were checked for several n and m, and the Bell only reads the lowest base-3 digit, but there is no formal proof), and the correctness of the long computation (GMP, one program). A second, independent implementation of the Bell iteration has meanwhile confirmed the result (check 6); what remains open is a formal proof, e.g. in Rocq (Coq): the Bell lemmas look easy, the hard part is certifying the ~3·10⁸-Bell iteration with numbers of ~1.24·10⁸ bits.
 
 ---
 
