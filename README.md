@@ -51,6 +51,12 @@ Only the lowest base-3 digit of n is read in a Bell, exactly as only the lowest 
 
 `src/derive_table.py` derives the table by breadth-first search over the words W: for each word and each class of m (0, 1, 2, ≥ 3) and each residue n mod 3 it builds the tape, runs the **real Turing machine** (`src/bellrun.py`) for one Bell and reads off W', Δm and c. The search closes with **192 words** and 1,662 table entries (`table/bell_table.txt`); 5 entries are HALT (word `00` or `00010`, n ≡ 2 mod 3, for m ≥ 1). The HALT entries do not depend on the counter m.
 
+<p align="center"><img src="img/derive_flow.png" alt="derivation of the Bell table" width="480"></p>
+<p align="center"><em>How <code>src/derive_table.py</code> derives the table: breadth-first search over the words W, one run of the real Turing machine per word, class of m and residue of n.</em></p>
+
+<p align="center"><img src="img/word_graph.png" alt="word graph" width="760"></p>
+<p align="center"><em>The resulting word graph: 192 words (circles) with an arrow W → W' for every table entry. Size and colour show how often a word occurs in the Markov chain (m ≥ 3, log scale). Only the two words <code>00</code> and <code>00010</code> lead to HALT, and both are rare; this is why the halting rate is only about 1.6·10⁻⁹ per Bell.</em></p>
+
 ### 3. Markov estimate
 Treating n mod 3 as independent and uniform, the words W form a Markov chain (`src/markov.py`):
 
@@ -131,6 +137,7 @@ To get the state 8 Bells before the HALT: `./belldc3 -t 298793327`, then n mod 3
 | `src/derive_table.py` | derives the table by breadth-first search over the words |
 | `src/iter_table.py`, `src/run_table.py` | naive exact iteration of the table |
 | `src/markov.py` | Markov estimate of the halting rate |
+| `img/derive_flow.png` (`.dot`), `img/word_graph.png` (`src/word_graph.py`) | diagrams: derivation of the table, word graph |
 | `verify/verify_table.py`, `verify/verify_table.out` | check of all table entries against the TM |
 | `verify/final_bells.c`, `verify/final_bells.out` | direct TM simulation of the last 8 Bells |
 

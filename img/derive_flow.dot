@@ -1,0 +1,28 @@
+digraph G {
+  rankdir=TB; bgcolor="white"; nodesep=0.35; ranksep=0.35;
+  node [shape=box, style="rounded,filled", fillcolor="#FFF3DD", color="#E69500", fontname="Helvetica", fontsize=12];
+  edge [color="#555555", fontname="Helvetica", fontsize=10];
+  start [label="start: queue = { empty word W }", fillcolor="#FFE0A8"];
+  pop   [label="take the next word W from the queue"];
+  loop  [label="for each class of m:  0, 1, 2, ≥ 3\nand each residue  r = n mod 3:  0, 1, 2\n(12 combinations per word)", shape=box];
+  build [label="build the Bell configuration\n0 11 0 1 0  1^n  W  (0 1 0 11)^m\nhead on the leftmost 0, state D\n(n = 3a + r, m a sample of the class)"];
+  run   [label="run the real Turing machine for one Bell\n(src/bellrun.py)"];
+  halt  [label="halts during the Bell?", shape=diamond, fillcolor="#FFFFFF"];
+  H     [label="table entry: HALT", fillcolor="#F4B6B6", color="#C0392B"];
+  read  [label="read off the next Bell configuration:\nnew word W', counter change Δm,\nconstant c with  n' = (4n + c)/3"];
+  entry [label="table entry\n(W, class of m, r)  →  (W', Δm, c)"];
+  new   [label="W' seen before?", shape=diamond, fillcolor="#FFFFFF"];
+  push  [label="add W' to the queue"];
+  more  [label="queue empty?", shape=diamond, fillcolor="#FFFFFF"];
+  done  [label="closed: 192 words, 1,662 entries, 5 HALT\n→ table/bell_table.txt", fillcolor="#FFE0A8"];
+  start -> pop -> loop -> build -> run -> halt;
+  halt -> H [label=" yes"];
+  halt -> read [label=" no"];
+  read -> entry -> new;
+  new -> push [label=" no"];
+  new -> more [label=" yes"];
+  push -> more;
+  H -> more;
+  more -> pop [label=" no"];
+  more -> done [label=" yes"];
+}
