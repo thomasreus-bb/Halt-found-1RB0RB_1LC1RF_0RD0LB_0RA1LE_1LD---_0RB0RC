@@ -1,7 +1,7 @@
 # 1RB0RB_1LC1RF_0RD0LB_0RA1LE_1LD---_0RB0RC halts (BB(6) holdout)
 
 Author: Thomas Reus, with the AI model Claude Opus 5.5  
-Status: 29 Oct 2026 (independently confirmed; a formal Coq/Rocq proof has been submitted to busycoq, PR #41, not yet merged)
+Status: 30 Oct 2026: **decided (HALT)**. The formal Coq/Rocq proof (busycoq PR #41) has been accepted; the machine is no longer in the BB(6) holdout list (608 machines, published 30 Oct 2026). On GitHub the PR is still shown as open (not yet merged).
 
 The BB(6) holdout
 
@@ -102,7 +102,7 @@ On the way, the orbit came within d = 1 of a HALT entry at Bell 154,541,599 with
 
 6. **Independent confirmation (22 Oct 2026).** Dennis (bbchallenge Discord) re-did the whole computation independently, starting from the TM alone and comparing with the data files only at the end: his own derivation of the Bell table (identical on every shared key), his own divide-and-conquer iteration (Python + gmpy2; agrees with a naive loop up to 10⁶ Bells, two block splits give identical results, all checkpoints and KCHECK lines match), and direct TM runs from reduced configurations for the last Bells. He obtains the same HALT: Bell 298,793,335, W = `00`, n ≡ 2 mod 3, m = 30,617,182, **n with 124,010,443 bits and n mod 2⁶⁴ = 10538133604703710903**; these values also follow from `belldc3`'s checkpoint at Bell 298,793,327 with 8 more Bells of the table.
 
-7. **Formal proof submitted (27 Oct 2026).** Dennis Koshta opened [Pull Request #41 in ccz181078/busycoq](https://github.com/ccz181078/busycoq/pull/41), "Prove 1RB0RB_1LC1RF_0RD0LB_0RA1LE_1LD---_0RB0RC halts (base-3 Bell map over BigInt)", which credits this repository for the halt and the Bell map. It is one Coq/Rocq file, `verify/BellBase3Halt_1RB0RB_1LC1RF.v` (5,233 lines). Status on 29 Oct: open, no reviews yet.
+7. **Formal proof submitted (27 Oct 2026).** Dennis Koshta opened [Pull Request #41 in ccz181078/busycoq](https://github.com/ccz181078/busycoq/pull/41), "Prove 1RB0RB_1LC1RF_0RD0LB_0RA1LE_1LD---_0RB0RC halts (base-3 Bell map over BigInt)", which credits this repository for the halt and the Bell map. It is one Coq/Rocq file, `verify/BellBase3Halt_1RB0RB_1LC1RF.v` (5,233 lines). **Accepted** (30 Oct 2026): the machine was removed from the BB(6) holdout list (608 machines). The PR itself is still open on GitHub (not yet merged).
    - **Bell configurations:** the same as here, with the repeated block `01011`, the word W and the counter m; one Bell sends n = 3q + r to 4q + e.
    - **Table:** 287 entries plus the halting entry, each proved as a lemma with busycoq's `es` tactic. They depend on W, min(m, 3) and n mod 3.
    - **Shift invariance:** if 2^d Bells take n to n′, they take n + k·3^(2^d) to n′ + k·4^(2^d). On this lemma a divide-and-conquer iteration over busycoq's `BigInt` is built; the quotients are computed outside and each split is checked with verified multiplication.
@@ -113,7 +113,7 @@ On the way, the orbit came within d = 1 of a HALT entry at Bell 154,541,599 with
      - the full check takes about 3–4 hours and about 19 GB of memory.
    - **Independent review** (described in the PR, done with another AI model): the full check re-run; all 288 table lemmas compared with a direct TM simulator on 4,250 instances; and the whole Bell iteration re-run with independent GMP code. All agree on the final state.
 
-**What is not proven formally:** that the Bell map with this table describes the machine for all n (the table entries were checked for several n and m, and the Bell only reads the lowest base-3 digit, but there is no formal proof), and the correctness of the long computation (GMP, one program). A second, independent implementation of the Bell iteration has meanwhile confirmed the result (check 6); a formal proof in Coq/Rocq that does exactly this (Bell lemmas for all n, plus a certified iteration of ~3·10⁸ Bells with numbers of ~1.24·10⁸ bits) has been submitted as busycoq PR #41 (check 7) and is awaiting review.
+**What is not proven formally:** that the Bell map with this table describes the machine for all n (the table entries were checked for several n and m, and the Bell only reads the lowest base-3 digit, but there is no formal proof), and the correctness of the long computation (GMP, one program). A second, independent implementation of the Bell iteration has meanwhile confirmed the result (check 6); a formal proof in Coq/Rocq that does exactly this (Bell lemmas for all n, plus a certified iteration of ~3·10⁸ Bells with numbers of ~1.24·10⁸ bits) has been submitted as busycoq PR #41 (check 7) and has been **accepted** (30 Oct 2026); the machine is no longer a holdout.
 
 ---
 
@@ -153,6 +153,6 @@ To get the state 8 Bells before the HALT: `./belldc3 -t 298793327`, then n mod 3
 | `verify/final_bells.c`, `verify/final_bells.out` | direct TM simulation of the last 8 Bells |
 
 ## Related
-- Formal proof (Coq/Rocq, open pull request): [ccz181078/busycoq #41](https://github.com/ccz181078/busycoq/pull/41) by Dennis Koshta
+- Formal proof (Coq/Rocq, accepted; pull request not yet merged): [ccz181078/busycoq #41](https://github.com/ccz181078/busycoq/pull/41) by Dennis Koshta
 - Vampire family (same method, base 2, orbits simulated to 10¹⁰–10¹¹ Bells without halt): [bb6-vampire-family-…](https://github.com/thomasreus-bb/bb6-vampire-family-1RB0LA_0RC0RB_1LD1LA_1LC1RE_1RF0RD_1LC---)
 - Discussion: bbchallenge Discord.
